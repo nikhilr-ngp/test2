@@ -12,7 +12,7 @@ graph TD
     J --> K[Augmented Prompt];
     K --> L[LLM];
     L --> M{Generate Response};
-    M --> N[Post-Processing (Optional)];
+    M --> N[Post-Processing];
     N --> O[Final Response];
     O --> P[User];
 
