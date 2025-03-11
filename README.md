@@ -1,5 +1,5 @@
 ```mermaid
-graph TD
+graph LR
     A[User Query] --> B{Query Embedding};
     B --> C[Embedding Model];
     C --> D[Query Vector];
