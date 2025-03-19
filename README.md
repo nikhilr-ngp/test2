@@ -95,7 +95,7 @@ graph TD;
     
     A[Client Requests] -->|Incoming Requests| B[Single Threaded Event Loop];
     
-    B -->|I/O Operations (File, Network, DB)| C[Delegates to OS Thread Pool];
+    B -->|I/O Operations File, Network, DB| C[Delegates to OS Thread Pool];
     
     C -->|Asynchronous Execution| D[Event Queue];
     
@@ -105,7 +105,7 @@ graph TD;
     
     F -->|Response Sent| G[Client Receives Response];
 
-    B -->|Microtask Queue (Promises, process.nextTick())| H[Higher Priority Execution];
+    B -->|Microtask Queue Promises, process.nextTick| H[Higher Priority Execution];
     
     H -->|Executed Before Next Event Loop Iteration| F;
     
