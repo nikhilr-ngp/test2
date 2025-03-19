@@ -19,7 +19,7 @@ sequenceDiagram
     Server->>Database: Store user Gmail & tokens
     Server->>Client: Create session & log user in
 ```
-
+###  General flow for any website
 ``` mermaid 
 sequenceDiagram
     participant User
@@ -41,7 +41,7 @@ sequenceDiagram
     Backend (Server)->>Frontend (Client): Log in the user & start session
 ```
 
-
+### General Flow for OpenAi website
 ``` mermaid
 sequenceDiagram
     participant User (You)
@@ -64,21 +64,27 @@ sequenceDiagram
 ```
 
 
+
+
+
+### PMS flow
+
 ``` mermaid
-graph TD;
-    A[User Clicks Sign in with Google] --> B[Redirect to Google OAuth]
-    B --> C[User Grants Permission]
-    C --> D[Google Sends Authorization Code]
-    D --> E[Backend Exchanges Code for Access Token]
-    E --> F[Google Returns User Info]
+sequenceDiagram
+    participant User
+    participant Frontend (Client)
+    participant Backend (AdonisJS Server)
+    participant Google OAuth Server
+    participant Database
 
-    F --> G{User Exists in OpenAI Database?}
-    G -- No --> H[Create New User Account]
-    H --> I[Store User Data]
-    I --> J[Redirect to Onboarding Page]
-
-    G -- Yes --> K[Retrieve Existing User Profile]
-    K --> L[Create Session & Log in]
-    L --> M[Redirect to Dashboard]
-
+    User->>Frontend (Client): Click "Sign in with Google"
+    Frontend (Client)->>Google OAuth Server: Redirect for authentication
+    Google OAuth Server->>Frontend (Client): Returns ID Token & Access Token
+    Frontend (Client)->>Backend (AdonisJS Server): Sends tokens for verification
+    Backend (AdonisJS Server)->>Google OAuth Server: Verifies ID Token
+    Google OAuth Server->>Backend (AdonisJS Server): Returns verification response
+    Backend (AdonisJS Server)->>Database: Checks if user exists
+    Database->>Backend (AdonisJS Server): Returns employee details
+    Backend (AdonisJS Server)->>Database: Updates user profile (if necessary)
+    Backend (AdonisJS Server)->>User: Returns JWT token for authentication
 ```
