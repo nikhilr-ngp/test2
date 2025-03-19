@@ -62,3 +62,23 @@ sequenceDiagram
     OpenAI Server (Backend)->>Database: Store user details (Gmail, tokens if needed)
     OpenAI Server (Backend)->>OpenAI Website (Frontend): Log in the user & start session
 ```
+
+
+``` mermaid
+graph TD;
+    A[User Clicks "Sign in with Google"] --> B[Redirect to Google OAuth]
+    B --> C[User Grants Permission]
+    C --> D[Google Sends Authorization Code]
+    D --> E[Backend Exchanges Code for Access Token]
+    E --> F[Google Returns User Info]
+
+    F --> G{User Exists in OpenAI Database?}
+    G -- No --> H[Create New User Account]
+    H --> I[Store User Data]
+    I --> J[Redirect to Onboarding Page]
+
+    G -- Yes --> K[Retrieve Existing User Profile]
+    K --> L[Create Session & Log in]
+    L --> M[Redirect to Dashboard]
+
+```
