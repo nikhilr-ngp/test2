@@ -114,3 +114,26 @@ graph TD;
     style H fill:#e76f51,stroke:#000,stroke-width:2px;
 
 ```
+
+### adonis
+``` mermaid
+graph TD;
+    A[Incoming HTTP Request] --> B[Global Middleware];
+    B --> C[Route Middleware];
+    C --> D[Validator];
+    D --> E[Controller];
+    E --> F[Service/Repository];
+    F --> G[Database or External API];
+    G --> H[Return Response to Controller];
+    H --> I[Controller Formats Response];
+    I --> J[Response Sent to Client];
+
+    style B fill:#f4a261,stroke:#000,stroke-width:2px;
+    style C fill:#e76f51,stroke:#000,stroke-width:2px;
+    style D fill:#2a9d8f,stroke:#000,stroke-width:2px;
+    style E fill:#457b9d,stroke:#000,stroke-width:2px;
+    style F fill:#1d3557,stroke:#fff,stroke-width:2px;
+    style G fill:#264653,stroke:#fff,stroke-width:2px;
+    style J fill:#2a9d8f,stroke:#000,stroke-width:2px;
+
+```
