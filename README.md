@@ -88,3 +88,29 @@ sequenceDiagram
     Backend (AdonisJS Server)->>Database: Updates user profile (if necessary)
     Backend (AdonisJS Server)->>User: Returns JWT token for authentication
 ```
+
+### Node JS
+``` mermaid
+graph TD;
+    
+    A[Client Requests] -->|Incoming Requests| B[Single Threaded Event Loop];
+    
+    B -->|I/O Operations (File, Network, DB)| C[Delegates to OS Thread Pool];
+    
+    C -->|Asynchronous Execution| D[Event Queue];
+    
+    D -->|Callback Registered| E[Callback Function];
+    
+    E -->|Processed by Event Loop| F[Execution in Main Thread];
+    
+    F -->|Response Sent| G[Client Receives Response];
+
+    B -->|Microtask Queue (Promises, process.nextTick())| H[Higher Priority Execution];
+    
+    H -->|Executed Before Next Event Loop Iteration| F;
+    
+    style B fill:#f4a261,stroke:#000,stroke-width:2px;
+    style D fill:#2a9d8f,stroke:#000,stroke-width:2px;
+    style H fill:#e76f51,stroke:#000,stroke-width:2px;
+
+```
