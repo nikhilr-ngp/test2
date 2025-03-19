@@ -19,3 +19,24 @@ sequenceDiagram
     Server->>Database: Store user Gmail & tokens
     Server->>Client: Create session & log user in
 ```
+
+``` mermaid 
+sequenceDiagram
+    participant User
+    participant Frontend (Client)
+    participant Backend (Server)
+    participant Google OAuth
+
+    User->>Frontend (Client): Click "Sign in with Google"
+    Frontend (Client)->>Google OAuth: Redirect with client_id, scope, redirect_uri
+    Google OAuth->>User: Show consent screen
+    User->>Google OAuth: Grant permissions
+    Google OAuth->>Frontend (Client): Redirect back with authorization code
+    Frontend (Client)->>Backend (Server): Send authorization code
+    Backend (Server)->>Google OAuth: Exchange code for access token
+    Google OAuth->>Backend (Server): Respond with access & refresh token
+    Backend (Server)->>Google OAuth: Fetch user email with access token
+    Google OAuth->>Backend (Server): Return user info (Gmail, profile, etc.)
+    Backend (Server)->>Database: Store user details
+    Backend (Server)->>Frontend (Client): Log in the user & start session
+```
