@@ -66,7 +66,7 @@ sequenceDiagram
 
 ``` mermaid
 graph TD;
-    A[User Clicks "Sign in with Google"] --> B[Redirect to Google OAuth]
+    A[User Clicks Sign in with Google] --> B[Redirect to Google OAuth]
     B --> C[User Grants Permission]
     C --> D[Google Sends Authorization Code]
     D --> E[Backend Exchanges Code for Access Token]
