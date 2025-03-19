@@ -40,3 +40,25 @@ sequenceDiagram
     Backend (Server)->>Database: Store user details
     Backend (Server)->>Frontend (Client): Log in the user & start session
 ```
+
+
+``` mermaid
+sequenceDiagram
+    participant User (You)
+    participant OpenAI Website (Frontend)
+    participant OpenAI Server (Backend)
+    participant Google OAuth Server
+
+    User (You)->>OpenAI Website (Frontend): Click "Sign in with Google"
+    OpenAI Website (Frontend)->>Google OAuth Server: Redirect with client_id, scope, redirect_uri
+    Google OAuth Server->>User (You): Show consent screen
+    User (You)->>Google OAuth Server: Grant permissions
+    Google OAuth Server->>OpenAI Website (Frontend): Redirect back with authorization code
+    OpenAI Website (Frontend)->>OpenAI Server (Backend): Send authorization code
+    OpenAI Server (Backend)->>Google OAuth Server: Exchange code for access token
+    Google OAuth Server->>OpenAI Server (Backend): Respond with access token & refresh token
+    OpenAI Server (Backend)->>Google OAuth Server: Fetch user email with access token
+    Google OAuth Server->>OpenAI Server (Backend): Return Gmail & profile info
+    OpenAI Server (Backend)->>Database: Store user details (Gmail, tokens if needed)
+    OpenAI Server (Backend)->>OpenAI Website (Frontend): Log in the user & start session
+```
