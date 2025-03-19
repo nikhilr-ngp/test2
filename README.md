@@ -1,4 +1,4 @@
-mermaid '''
+``` mermaid 
 
 sequenceDiagram
     participant User
@@ -18,4 +18,4 @@ sequenceDiagram
     Google API->>Server: Respond with user’s Gmail and profile info
     Server->>Database: Store user Gmail & tokens
     Server->>Client: Create session & log user in
-
+```
