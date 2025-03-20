@@ -1,43 +1,45 @@
 ``` mermaid
 graph TD;
 
-    %% Registration and Login Processes
-    Register["(Register)"] -->|Enter name, email, password| Save_User
-    Save_User -->|Saved Successfully| Login["(Login)"]
+    %% User Authentication
+    P1((User Authentication)) -->|Enter Details| P1.1((Register User))
+    P1.1 -->|Save User| DB1[(User Database)]
+    P1((User Authentication)) -->|Enter Credentials| P1.2((Login Verification))
+    P1.2 -->|Check Details| DB1
+    P1.2 -->|Success/Failure| User[User]
 
-    Login -->|Enter email, password| Authenticate
-    Authenticate -->|Successful login| User
-    Authenticate -->|Failed login| Login
+    %% User Interaction
+    P2((User Interaction)) -->|Request Material| P2.1((View Material))
+    P2.1 -->|Fetch from DB| DB2[(Material, Exercise, Content Database)]
+    P2((User Interaction)) -->|Request Exercise| P2.2((View Exercises))
+    P2.2 -->|Fetch from DB| DB2
+    P2((User Interaction)) -->|Request Media| P2.3((View Content))
+    P2.3 -->|Fetch from DB| DB2
 
-    %% User Interactions
-    User -->|View Material| Materials
-    User -->|View Exercises| Exercises
-    User -->|View Media Content| Contents
+    %% User Management
+    P3((User Management)) -->|Modify Users| P3.1((Update User Info))
+    P3.1 -->|Update Data| DB1
+    P3((User Management)) -->|View Users| P3.2((Retrieve User List))
+    P3.2 -->|Fetch from DB| DB1
 
-    %% Admin Interactions
-    Admin -->|Manage Users| Users
-    Admin -->|Manage Materials| Materials
-    Admin -->|Manage Exercises| Exercises
-    Admin -->|Manage Content| Contents
+    %% Material Management
+    P4((Material Management)) -->|Add Material| P4.1((Save Material))
+    P4.1 -->|Store in DB| DB2
+    P4((Material Management)) -->|View Material| P4.2((Retrieve Material))
+    P4.2 -->|Fetch from DB| DB2
 
-    %% Managing Users
-    Users -->|Retrieve User List| Admin
-    Users -->|Modify Users| Admin
+    %% Exercise Management
+    P5((Exercise Management)) -->|Add Exercise| P5.1((Save Exercise))
+    P5.1 -->|Store in DB| DB2
+    P5((Exercise Management)) -->|View Exercise| P5.2((Retrieve Exercise))
+    P5.2 -->|Fetch from DB| DB2
 
-    %% Managing Materials
-    Materials -->|Save New Material| Store_Material
-    Store_Material -->|Saved Successfully| Materials
-    Materials -->|Provide Material Data| User
+    %% Content Management
+    P6((Content Management)) -->|Add Media| P6.1((Save Media))
+    P6.1 -->|Store in DB| DB2
+    P6((Content Management)) -->|View Media| P6.2((Retrieve Media))
+    P6.2 -->|Fetch from DB| DB2
 
-    %% Managing Exercises
-    Exercises -->|Save New Exercise| Store_Exercise
-    Store_Exercise -->|Saved Successfully| Exercises
-    Exercises -->|Provide Exercise Data| User
-
-    %% Managing Media Content
-    Contents -->|Save Video, Image| Store_Media
-    Store_Media -->|Saved Successfully| Contents
-    Contents -->|Provide Media Data| User
 ```
 
 ``` mermaid 
