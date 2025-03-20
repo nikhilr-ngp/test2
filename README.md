@@ -1,3 +1,45 @@
+``` mermaid
+graph TD;
+
+    %% Registration and Login Processes
+    Register["(Register)"] -->|Enter name, email, password| Save_User
+    Save_User -->|Saved Successfully| Login["(Login)"]
+
+    Login -->|Enter email, password| Authenticate
+    Authenticate -->|Successful login| User
+    Authenticate -->|Failed login| Login
+
+    %% User Interactions
+    User -->|View Material| Materials
+    User -->|View Exercises| Exercises
+    User -->|View Media Content| Contents
+
+    %% Admin Interactions
+    Admin -->|Manage Users| Users
+    Admin -->|Manage Materials| Materials
+    Admin -->|Manage Exercises| Exercises
+    Admin -->|Manage Content| Contents
+
+    %% Managing Users
+    Users -->|Retrieve User List| Admin
+    Users -->|Modify Users| Admin
+
+    %% Managing Materials
+    Materials -->|Save New Material| Store_Material
+    Store_Material -->|Saved Successfully| Materials
+    Materials -->|Provide Material Data| User
+
+    %% Managing Exercises
+    Exercises -->|Save New Exercise| Store_Exercise
+    Store_Exercise -->|Saved Successfully| Exercises
+    Exercises -->|Provide Exercise Data| User
+
+    %% Managing Media Content
+    Contents -->|Save Video, Image| Store_Media
+    Store_Media -->|Saved Successfully| Contents
+    Contents -->|Provide Media Data| User
+```
+
 ``` mermaid 
 
 sequenceDiagram
