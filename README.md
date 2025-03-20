@@ -1,5 +1,5 @@
 ``` mermaid
-graph TD;
+graph LR;
 
     %% User Authentication
     P1((User Authentication)) -->|Enter Details| P1.1((Register User))
